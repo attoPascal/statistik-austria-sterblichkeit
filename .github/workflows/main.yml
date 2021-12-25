@@ -1,4 +1,4 @@
-name: CI
+name: Automated Data Retrieval
 
 on:
   schedule:
@@ -28,5 +28,5 @@ jobs:
         run: |
           git config --global user.name 'MDornacher'
           git config --global user.email 'mdornacher@users.noreply.github.com'
-          git commit -am "Automated report"
+          git commit -am "Automated data retrieval"
           git push
