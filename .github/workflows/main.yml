@@ -26,7 +26,7 @@ jobs:
         run: date +%s > report.txt
       - name: Commit report
         run: |
-          git config --global user.name 'MDornacher'
-          git config --global user.email 'mdornacher@users.noreply.github.com'
+          git config --global user.name 'Pascal Attwenger'
+          git config --global user.email 'attoPascal@users.noreply.github.com'
           git commit -am "Automated data retrieval"
           git push
