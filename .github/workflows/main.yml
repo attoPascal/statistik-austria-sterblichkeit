@@ -1,0 +1,32 @@
+name: Automated Data Retrieval
+
+on:
+  schedule:
+    - cron: "0 0 * * *" #runs at 00:00 UTC everyday
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Install apt requirements
+        run: sudo apt update -y && sudo apt upgrade -y && sudo apt install ffmpeg
+      - name: Update statistics
+        run: |
+          jupyter nbconvert --execute --to notebook --inplace sterblichkeit.ipynb
+      - name: Create report file
+        run: date +%s > report.txt
+      - name: Commit report
+        run: |
+          git config --global user.name 'Pascal Attwenger'
+          git config --global user.email 'attoPascal@users.noreply.github.com'
+          git commit -am "Automated data retrieval"
+          git push
